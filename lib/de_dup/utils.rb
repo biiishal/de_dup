@@ -15,7 +15,7 @@ module DeDup
     def self.img_entries
       Dir.glob('**/*').select do |entry|
         %w[.jpg .JPG .jpeg .png].include?(File.extname(entry))
-      end
+      end.sort
     end
 
     # Returns a hash map with generated MD5 hash of a file as key and
