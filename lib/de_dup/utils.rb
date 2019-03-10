@@ -7,7 +7,7 @@ module DeDup
   module Utils
     def self.unzip(zip_file)
       return 'Please input a .zip file.' unless File.extname(zip_file) == '.zip'
-      %x(`unzip #{zip_file} -d tmp/`)
+      %x(`unzip #{zip_file} -d #{File.basename(zip_file)}_tmp/`)
     end
 
     # Returns all the file paths with extensions .jpg, .JPG, .jpeg or .png

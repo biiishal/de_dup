@@ -6,13 +6,13 @@ RSpec.describe DeDup::Utils do
       expect(DeDup::Utils.unzip('anything.txt')).to eq('Please input a .zip file.')
     end
 
-    it 'unzips a .zip file to ./tmp directory' do
+    it 'unzips a .zip file to <file_base_name>_tmp directory' do
       Dir.chdir('spec/fixtures/expected_extract')
       expected_entries = Dir.glob('**/*')
       Dir.chdir('../../../') # change dir to root
       DeDup::Utils.unzip('spec/fixtures/test_images.zip')
-      expect((Dir.entries('.').include? 'tmp')).to be_truthy
-      Dir.chdir('tmp')
+      expect((Dir.entries('.').include? 'test_images.zip_tmp')).to be_truthy
+      Dir.chdir('test_images.zip_tmp')
       expect(Dir.glob('**/*')).to eq(expected_entries)
       FileUtils.rm_rf('.') # clean up
       Dir.chdir('../')
