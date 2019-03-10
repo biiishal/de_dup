@@ -7,19 +7,20 @@ RSpec.describe DeDup::Utils do
     end
 
     it 'unzips a .zip file to ./tmp directory' do
-      Dir.chdir('spec/fixtures/test_images')
+      Dir.chdir('spec/fixtures/expected_extract')
       expected_entries = Dir.glob('**/*')
-      Dir.chdir('../../../')
+      Dir.chdir('../../../') # change dir to root
       DeDup::Utils.unzip('spec/fixtures/test_images.zip')
       expect((Dir.entries('.').include? 'tmp')).to be_truthy
       Dir.chdir('tmp')
       expect(Dir.glob('**/*')).to eq(expected_entries)
-      FileUtils.rm_rf('.')
+      FileUtils.rm_rf('.') # clean up
+      Dir.chdir('../')
     end
   end
 
   describe '.img_entries' do
-    it 'returns an array of all paths of image files in a directory'
+    it 'returns an array of all paths of only image files current directory'
   end
 
   describe '.md5_map' do
