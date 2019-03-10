@@ -2,7 +2,20 @@
 
 RSpec.describe DeDup::Utils do
   describe '.unzip' do
-    it 'unzips a .zip file to ./tmp directory'
+    it 'returns a message if provided file is not a .zip file' do
+      expect(DeDup::Utils.unzip('anything.txt')).to eq('Please input a .zip file.')
+    end
+
+    it 'unzips a .zip file to ./tmp directory' do
+      Dir.chdir('spec/fixtures/test_images')
+      expected_entries = Dir.glob('**/*')
+      Dir.chdir('../../../')
+      DeDup::Utils.unzip('spec/fixtures/test_images.zip')
+      expect((Dir.entries('.').include? 'tmp')).to be_truthy
+      Dir.chdir('tmp')
+      expect(Dir.glob('**/*')).to eq(expected_entries)
+      FileUtils.rm_rf('.')
+    end
   end
 
   describe '.img_entries' do
