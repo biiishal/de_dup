@@ -14,7 +14,8 @@ module DeDup
           DeDup::Utils.img_entries
         )
       )
-      FileUtils.rm_rf('.')
+      Dir.chdir('../')
+      FileUtils.rm_rf('tmp/.')
       'Done!'
     end
   end
