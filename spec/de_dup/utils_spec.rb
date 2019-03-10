@@ -14,8 +14,8 @@ RSpec.describe DeDup::Utils do
       expect((Dir.entries('.').include? 'test_images.zip_tmp')).to be_truthy
       Dir.chdir('test_images.zip_tmp')
       expect(Dir.glob('**/*')).to eq(expected_entries)
-      FileUtils.rm_rf('.') # clean up
       Dir.chdir('../')
+      FileUtils.rm_rf('test_images.zip_tmp') # clean up
     end
   end
 
