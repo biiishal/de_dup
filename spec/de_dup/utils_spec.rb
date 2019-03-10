@@ -46,7 +46,7 @@ RSpec.describe DeDup::Utils do
         'a5751acf7c7af17ceae4baa615dfc14d' => ['test_images/test_images/folder_3/water taxis.jpg']
       }
       Dir.chdir('spec/fixtures/expected_extract')
-      img_entries = DeDup::Utils.img_entries.sort
+      img_entries = DeDup::Utils.img_entries
       expect(DeDup::Utils.md5_map(img_entries)).to eq(expected_result)
       Dir.chdir('../../../')
     end
@@ -68,7 +68,9 @@ RSpec.describe DeDup::Utils do
     end
 
     it "prints values of a hash map if it's an array and has >1 element" do
-      expect { DeDup::Utils.print_results(test_map) }.to output(expected_output).to_stdout
+      expect do
+        DeDup::Utils.print_results(test_map)
+      end.to output(expected_output).to_stdout
     end
   end
 end

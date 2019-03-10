@@ -2,6 +2,7 @@
 
 require 'de_dup/version'
 require 'de_dup/utils'
+require 'de_dup/images'
 
 # A simple library to list out paths to duplicate images in a directory.
 module DeDup
