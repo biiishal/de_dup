@@ -48,10 +48,27 @@ RSpec.describe DeDup::Utils do
       Dir.chdir('spec/fixtures/expected_extract')
       img_entries = DeDup::Utils.img_entries.sort
       expect(DeDup::Utils.md5_map(img_entries)).to eq(expected_result)
+      Dir.chdir('../../../')
     end
   end
 
   describe '.print_results' do
-    it "prints values of a hash map if it's an array and has >1 element"
+    let(:test_map) do
+      {
+        'a' => ['a_word_1'],
+        'b' => ['b_word_1', 'b_word_2', 'b_word_3'],
+        'c' => ['c_word_1', 'c_word_2']
+      }
+    end
+
+    let(:outstream) { StringIO.new }
+
+    let(:expected_output) do
+      "Duplicate images:\n\nb_word_1\nb_word_2\nb_word_3\n\n====================\n\nc_word_1\nc_word_2\n\n====================\n\n"
+    end
+
+    it "prints values of a hash map if it's an array and has >1 element" do
+      expect { DeDup::Utils.print_results(test_map) }.to output(expected_output).to_stdout
+    end
   end
 end

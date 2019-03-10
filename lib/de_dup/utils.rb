@@ -30,5 +30,14 @@ module DeDup
       end
       md5_map
     end
+
+    # Given {'key' => ['value1', 'value2',..] } prints values if more than one
+    # are present.
+    def self.print_results(map)
+      puts "Duplicate images:\n\n"
+      map.values.each do |el|
+        puts el.join("\n") + "\n\n====================\n\n" if el.length > 1
+      end
+    end
   end
 end
