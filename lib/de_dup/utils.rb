@@ -7,5 +7,13 @@ module DeDup
       return 'Please input a .zip file.' unless File.extname(zip_file) == '.zip'
       %x(`unzip #{zip_file} -d tmp/`)
     end
+
+    # Returns all the file paths with extensions .jpg, .JPG, .jpeg or .png
+    # inside a directory
+    def self.img_entries
+      Dir.glob('**/*').select do |entry|
+        %w[.jpg .JPG .jpeg .png].include?(File.extname(entry))
+      end
+    end
   end
 end
