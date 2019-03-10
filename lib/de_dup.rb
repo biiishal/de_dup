@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'de_dup/version'
-require 'de_dup/utils'
-require 'de_dup/images'
+%w[version utils images].each do |file|
+  require_relative "./de_dup/#{file}.rb"
+end
 
 # A simple library to list out paths to duplicate images in a directory.
 module DeDup

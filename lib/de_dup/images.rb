@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'digest/md5'
+require 'fileutils'
 
 module DeDup
   # Methods for image file types.
